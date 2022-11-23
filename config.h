@@ -1,6 +1,8 @@
 #define CMDLENGTH 45
 #define DELIMITER "  "
 #define CLICKABLE_BLOCKS
+#define STATUSSEP ";"
+#define STATUSSEPINDEX 6
 
 const Block blocks[] = {
 	BLOCK("sb-mail",    1800, 17),

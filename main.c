@@ -99,11 +99,16 @@ int getStatus(char *new, char *old) {
 
     for (int i = 0; i < LEN(blocks); i++) {
 #if LEADING_DELIMITER
+        if (i == STATUSSEPINDEX)
+            strcat(new, STATUSSEP);
         if (strlen(outputs[i]))
-#else
-        if (strlen(new) && strlen(outputs[i]))
-#endif
             strcat(new, DELIMITER);
+#else
+        if (strlen(new) && strlen(outputs[i]) && i != STATUSSEPINDEX)
+            strcat(new, DELIMITER);
+        else if (i == STATUSSEPINDEX)
+            strcat(new, STATUSSEP);
+#endif
         strcat(new, outputs[i]);
     }
     return strcmp(new, old);
