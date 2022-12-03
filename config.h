@@ -2,11 +2,13 @@
 #define DELIMITER "   "
 #define CLICKABLE_BLOCKS
 #define STATUSSEP ";"
-#define STATUSSEPINDEX 8
+#define STATUSSEPINDEX 10
 // #define LEADING_DELIMITER 1
 
 const Block blocks[] = {
-	BLOCK("sb-forecast",       18000,   17),
+	BLOCK("sb-forecast-rain",  18000,   15),
+	BLOCK("sb-forecast-low",   18000,   16),
+	BLOCK("sb-forecast-high",  18000,   17),
 	BLOCK("sb-pacpackages",    1800,    18),
 	BLOCK("sb-mail",           1800,    19),
 	BLOCK("sb-rss",            1800,    20),
