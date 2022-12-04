@@ -6,7 +6,7 @@
 # You could set up a shell alias to view the full file in a pager in the
 # terminal if desired. This function will only be run once a day when needed.
 weatherreport="${XDG_CACHE_HOME:-$HOME/.cache}/weatherreport"
-getforecast() { curl -sf "wttr.in" > "$weatherreport" || exit 1 ;}
+getforecast() { curl -sf "wttr.in/London" > "$weatherreport" || exit 1 ;}
 
 case $BLOCK_BUTTON in
 	1) setsid -f "$TERMINAL" -e less -Srf "$weatherreport" ;;
