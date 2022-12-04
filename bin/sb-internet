@@ -2,13 +2,13 @@
 
 case $BLOCK_BUTTON in
 	1) "$TERMINAL" -e nmtui; pkill -RTMIN+4 dwmblocks ;;
-	3) notify-send " internet module" "\- Click to connect
-睊: wifi disabled
-睊: no wifi connection
-直: wifi connection with quality
-ﲁ: no ethernet
-: ethernet working
-: vpn is active
+	3) notify-send " Internet module" "Click to connect
+睊 wifi disabled
+睊 no wifi connection
+直 wifi connected
+ﲁ no ethernet
+ ethernet working
+ vpn is active
 " ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
