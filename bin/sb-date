@@ -5,6 +5,7 @@ case $BLOCK_BUTTON in
         "$(cal --color=always | sed "s/..7m/<b><span color=\"$(palette.sh 1)\">/;s/..27m/<\/span><\/b>/")" \
         # && notify-send "Appointments" "$(calcurse -d3)"
     ;;
+	3) notify-send " Time/date module" "Left click to show the month calendar via \`cal\`" ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
