@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# Displays number of upgradeable packages via apt.
+# For this to work, have a `apt update` command run in the background as a
+# cronjob every so often as root using `sudo crontab -e`.
+# E.g: to run every 10 minutes and write output to a log file:
+# */10 * * * * /usr/bin/apt update >> /var/log/apt-update.log 2>&1
+#
+# Add a file /etc/apt/apt.conf.d/100update
+# containing:
+# APT::Update::Pre-Invoke  {"/usr/bin/pkill -RTMIN+18 dwmblocks";};
+# which will cause this script to be reloaded in dwmblocks everytime the root cronjob runs `apt update`.
+# Add another file /etc/apt/apt.conf.d/80upgradehook
+# containing:
+# DPkg::Post-Invoke {"/usr/bin/pkill -RTMIN+18 dwmblocks";};
+# which will cause this script to be reloaded in dwmblocks when packages are update via `sudo apt upgrade` or installed via `sudo apt install`.
+
+case $BLOCK_BUTTON in
+	2) notify-send "$(/usr/bin/apt list --upgradeable)" ;;
+	3) notify-send " Upgrade module" " Number of upgradable packages
+Middle click to show upgradable packages" ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+apt list --upgradable 2>/dev/null | grep -c 'upgradable' | awk '{ print "", $1 }'
