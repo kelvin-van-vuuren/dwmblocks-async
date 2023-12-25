@@ -1,5 +1,5 @@
 #!/bin/sh
 
-source sb-forecast
+. sb-forecast
 
 printf "%s" "$(sed '13q;d' "$weatherreport" | grep -o "m\\([-+]\\)*[0-9]\\+" | sed 's/+//g' | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk '{print "盛 " $2 "°"}')"

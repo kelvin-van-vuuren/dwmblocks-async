@@ -1,5 +1,5 @@
 #!/bin/sh
 
-source sb-forecast
+. sb-forecast
 
 printf "%s" "$(sed '16q;d' "$weatherreport" | grep -wo "[0-9]*%" | sort -rn | sed "s/^/ /g;1q" | tr -d '\n')"
