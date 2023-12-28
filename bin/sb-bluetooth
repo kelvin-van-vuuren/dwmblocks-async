@@ -1,0 +1,39 @@
+#!/bin/sh
+# dwmblocks script for bluetooth
+
+case "$BUTTON" in
+  1)
+    pgrep -f nmtui || "$TERMINAL" -e bluetoothctl
+    pkill -RTMIN+12 dwmblocks
+    ;;
+  3)
+    notify Bluetooth "Toggling bluetooth..."
+    rfkill toggle bluetooth
+    pkill -RTMIN+12 dwmblocks
+    ;;
+  6) "$TERMINAL" -e "$EDITOR" "$0"
+    ;;
+esac
+
+bt="$(bluetoothctl show)"
+res=""
+if [ "$bt" = "No default controller available" ]; then
+  res=" 🛑"
+elif printf '%s' "$bt" | grep '^\s*Powered: no' >/dev/null 2>&1; then
+  res=' ❌'
+elif printf '%s' "$bt" | grep '^\s*Powered: yes' >/dev/null 2>&1; then
+  res=''
+  while read -r uuid; do
+      info="$(bluetoothctl info "$uuid")"
+      if printf '%s' "$info" | grep '^\s*Connected: yes' >/dev/null 2>&1; then
+        res="$res $(printf '%s' "$info" | awk -F': ' '
+          /Icon: audio-headset/ { printf "🎧 " }
+          /Icon: audio-card/ { printf "📢" }
+          /Battery Percentage/ { split($2, a, "[ ()]*"); printf a[2]"%" }
+        ')"
+      fi
+  done <<EOF
+  $(bluetoothctl devices | cut -f2 -d' ')
+EOF
+fi
+printf '%s' "$res"
