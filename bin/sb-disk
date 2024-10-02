@@ -14,4 +14,5 @@ fetchDiskUsage() {
     printf "${avail}G"
 }
 
-echo "$(printf ) $(fetchDiskUsage /)$(printf '|')$(fetchDiskUsage /home)"
+# echo "$(printf ) $(fetchDiskUsage /)$(printf '|')$(fetchDiskUsage /home)"
+echo "$(printf ) $(fetchDiskUsage /)"
